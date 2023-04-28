@@ -7,6 +7,7 @@ LABEL maintainer="Gill"
 # sourceguardian https://stackoverflow.com/questions/64043106/how-to-install-php-extensionson-sourceguardian-on-wordpress-docker-image
 # gmp zip
 # mongodb swoole
+# pcntl
 RUN apt-get update && apt-get install -y \
  libfreetype6-dev \
  libjpeg62-turbo-dev \
@@ -31,7 +32,9 @@ RUN apt-get update && apt-get install -y \
  && tar -xzf loaders.linux-aarch64.tar.gz \
  && cp ixed.7.4.lin "$(php -i | grep '^extension_dir =' | cut -d' ' -f3)/sourceguardian.so" \
  && echo "extension=sourceguardian.so" > /usr/local/etc/php/conf.d/15-sourceguardian.ini \
- && rm -rf /tmp/sourceguardian
+ && rm -rf /tmp/sourceguardian \
+ && docker-php-ext-configure pcntl --enable-pcntl \
+ && docker-php-ext-install pcntl
 
 # RUN apt-get update
 # # gd
@@ -73,3 +76,7 @@ RUN apt-get update && apt-get install -y \
 #  && cp ixed.7.4.lin "$(php -i | grep '^extension_dir =' | cut -d' ' -f3)/sourceguardian.so" \
 #  && echo "extension=sourceguardian.so" > /usr/local/etc/php/conf.d/15-sourceguardian.ini \
 #  && rm -rf /tmp/sourceguardian
+
+# # pcntl
+# RUN docker-php-ext-configure pcntl --enable-pcntl \
+#  && docker-php-ext-install pcntl

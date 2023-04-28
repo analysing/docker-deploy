@@ -62,7 +62,7 @@ RUN apt-get update && apt-get install -y \
 # RUN pecl install redis-5.3.7 \
 #  && docker-php-ext-enable redis
 
-# # compose
+# # composer
 # RUN curl -sLS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
 # # sourceguardian ixed.7.4.lin

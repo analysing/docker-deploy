@@ -1,0 +1,15 @@
+.*.swp
+.DS_Store
+.vscode/
+
+etc/mysql/data/*
+!etc/mysql/data/.gitkeep
+
+etc/nginx/conf.d/*
+!etc/nginx/conf.d/.gitkeep
+
+etc/nginx/log/*
+!etc/nginx/log/.gitkeep
+
+web/*
+!web/.gitkeep

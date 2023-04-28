@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - "./etc/nginx/conf.d/:/etc/nginx/conf.d/"
+      - "./etc/nginx/log/:/var/log/nginx/"
+      - "./web/:/var/www/html/"
+    ports:
+      - "8080:80"
+      - "61600-61900:61600-61900"
+    depends_on:
+      - php
+      - mysql
+      - redis
+
+  php:
+    build:
+      context: .
+    volumes:
+      - "./web/:/var/www/html/"
+    ports:
+      - "9000:9000"
+    
+  mysql:
+    image: mysql:8.0.33
+    volumes:
+      - "./etc/mysql/data/:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: ivy12345
+      MYSQL_USER: bill
+      MYSQL_PASSWORD: ivy1234
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"

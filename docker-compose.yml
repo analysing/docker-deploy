@@ -25,12 +25,15 @@ services:
     
   mysql:
     image: mysql:8.0.33
+    # image: mysql:5.7
     volumes:
       - "./etc/mysql/data/:/var/lib/mysql"
+    env_file:
+      - ".env"
     environment:
-      MYSQL_ROOT_PASSWORD: ivy12345
-      MYSQL_USER: bill
-      MYSQL_PASSWORD: ivy1234
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
 
